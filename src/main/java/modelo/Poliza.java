@@ -1,5 +1,7 @@
 package modelo;
 
+
+@Entity
 public class Poliza {
 	private String clave;
 	private int tipo;
