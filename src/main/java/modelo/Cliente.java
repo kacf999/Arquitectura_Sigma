@@ -1,11 +1,16 @@
 package modelo;
 
-import java.util.Calendar;
+import java.sql.Date;
 
 public class Cliente extends Persona implements OperacionesREST {
 	private String direccion;
 	private String curp;
-	public Cliente(String nombre, String primerApellido, String segundoApellido, Calendar fechaNacimiento,
+	
+	public Cliente() {
+		super();
+	}
+	
+	public Cliente(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento,
 			String direccion, String curp) {
 		super(nombre, primerApellido, segundoApellido, fechaNacimiento);
 		this.direccion = direccion;
