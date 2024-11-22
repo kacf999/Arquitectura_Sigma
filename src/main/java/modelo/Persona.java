@@ -20,7 +20,7 @@ public class Persona implements OperacionesREST{
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
-		setFechaNacimiento(fechaNacimiento);
+		setFechaNacimientoString(fechaNacimiento);
 	}
 	
 	public String getNombre() {
@@ -47,15 +47,24 @@ public class Persona implements OperacionesREST{
 		this.segundoApellido = segundoApellido;
 	}
 	
-	public Date getFechaNacimiento() {
+	public String getFechaNacimientoString() {
+		return fechaNacimiento.toString();
+	}
+	
+	public Date getFechaNacimientoDate() {
 		return fechaNacimiento;
 	}
 	
-	public void setFechaNacimiento(String fechaNacimiento) throws ParseException {
+	public void setFechaNacimientoString(String fechaNacimiento) throws ParseException {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd");
 		
 		this.fechaNacimiento = new Date(sdf.parse(fechaNacimiento).getTime());
 	}
+	
+	public void setFechaNacimientoDate(Date fechaNacimiento) {
+		this.fechaNacimiento=fechaNacimiento;
+	}
+	
 	@Override
 	
 	public void get() {

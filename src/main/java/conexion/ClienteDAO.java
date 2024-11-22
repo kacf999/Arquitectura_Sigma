@@ -1,6 +1,7 @@
 package conexion;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.Optional;
 
 import modelo.Cliente;
@@ -50,7 +51,7 @@ public class ClienteDAO {
 				statememt.setString(3, cliente.getSegundoApellido());
 				statememt.setString(4, cliente.getDireccion());
 				statememt.setString(5, cliente.getCurp());
-				statememt.setDate(6, cliente.getFechaNacimiento());
+				statememt.setDate(6, cliente.getFechaNacimientoDate());
 				statememt.executeUpdate();
 				exito=true;
 			} catch (SQLException e) {
@@ -107,7 +108,7 @@ public class ClienteDAO {
 				statememt.setString(3, cliente.getSegundoApellido());
 				statememt.setString(4, cliente.getDireccion());
 				statememt.setString(5, cliente.getCurp());
-				statememt.setDate(6, cliente.getFechaNacimiento());
+				statememt.setDate(6, cliente.getFechaNacimientoDate());
 				statememt.setString(7, cliente.getCurp());
 				statememt.executeUpdate();
 				conect.commit();
@@ -125,10 +126,32 @@ public class ClienteDAO {
 	
 	
 	public Cliente getCliente(String id) {
-		Cliente cliente=new Cliente();
+		Cliente cliente=null;
 		
+		conect = conexionDB.getConexion();
+		String statememtSQL="";
+		ResultSet resultado;
 		
-		
+		statememtSQL = "SELECT * FROM cliente WHERE curp=?";	
+		PreparedStatement statememt;
+		try {
+			statememt = conect.prepareStatement(statememtSQL);
+			statememt.setString(1, id);
+			resultado=statememt.executeQuery();
+			while(resultado.next()) {
+				cliente=new Cliente();
+				cliente.setNombre(resultado.getString("nombres"));
+				cliente.setPrimerApellido(resultado.getString("primer_apellido"));
+				cliente.setSegundoApellido(resultado.getString("segundo_apellido"));
+				cliente.setDireccion(resultado.getString("direccion"));
+				cliente.setCurp(resultado.getString("curp"));
+				cliente.setFechaNacimientoDate(resultado.getDate("fecha_nacimiento"));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conexionDB.closeConexion();
+		}			
 		return cliente;
 	}
 	
