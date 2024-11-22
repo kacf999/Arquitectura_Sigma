@@ -1,6 +1,8 @@
 package modelo;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Persona implements OperacionesREST{
@@ -13,12 +15,12 @@ public class Persona implements OperacionesREST{
 		
 	}
 	
-	public Persona(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento) {
+	public Persona(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento) throws ParseException {
 		super();
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
-		this.fechaNacimiento = fechaNacimiento;
+		setFechaNacimiento(fechaNacimiento);
 	}
 	
 	public String getNombre() {
@@ -49,8 +51,10 @@ public class Persona implements OperacionesREST{
 		return fechaNacimiento;
 	}
 	
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public void setFechaNacimiento(String fechaNacimiento) throws ParseException {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd");
+		
+		this.fechaNacimiento = new Date(sdf.parse(fechaNacimiento).getTime());
 	}
 	@Override
 	

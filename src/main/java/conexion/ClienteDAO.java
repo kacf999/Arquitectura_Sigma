@@ -1,6 +1,7 @@
 package conexion;
 
 import java.sql.*;
+import java.util.Optional;
 
 import modelo.Cliente;
 import modelo.ExceptionPoliza;
@@ -20,25 +21,30 @@ import modelo.ExceptionPoliza;
 
 public class ClienteDAO {
 	private ConexionBD conexionDB;
-	private Connection conexion;
+	private Connection conect;
 	
 	public ClienteDAO() {
 		conexionDB=new ConexionBD();
 	}
 	
-	public boolean newCliente(Cliente cliente) throws ExceptionPoliza {
+	/**
+	 * @param cliente
+	 * @return
+	 * @throws ExceptionPoliza
+	 */
+	public boolean addCliente(Cliente cliente) throws ExceptionPoliza {
 		boolean exito=false;
 		
 		if(esObjetoVacio(cliente)) {
 			conexionDB.closeConexion();
 			throw new ExceptionPoliza(204);
 		}else {
-			conexion = conexionDB.getConexion();
+			conect = conexionDB.getConexion();
 			String statememtSQL = "INSERT INTO cliente VALUES(?,?,?,?,?,?)";
 
 			PreparedStatement statememt;
 			try {
-				statememt = conexion.prepareStatement(statememtSQL);
+				statememt = conect.prepareStatement(statememtSQL);
 				statememt.setString(1, cliente.getNombre());
 				statememt.setString(2, cliente.getPrimerApellido());
 				statememt.setString(3, cliente.getSegundoApellido());
@@ -63,12 +69,12 @@ public class ClienteDAO {
 			conexionDB.closeConexion();
 			throw new ExceptionPoliza(204);
 		}else {		
-			conexion = conexionDB.getConexion();
+			conect = conexionDB.getConexion();
 			String statememtSQL = "DELETE FROM cliente WHERE curp =?";
 	
 			PreparedStatement statememt;
 			try {
-				statememt = conexion.prepareStatement(statememtSQL);
+				statememt = conect.prepareStatement(statememtSQL);
 				statememt.setString(1, cliente.getCurp());
 				statememt.executeUpdate();
 				exito=true;
@@ -81,13 +87,42 @@ public class ClienteDAO {
 		return exito;
 	}
 	
-	public boolean updateCliente(Cliente cliente) {
+	public boolean updateCliente(Cliente cliente) throws ExceptionPoliza, SQLException {
 		boolean exito=false;
 		
-		
-		
+		if(esObjetoVacio(cliente)) {
+			conexionDB.closeConexion();
+			throw new ExceptionPoliza(204);
+		}else {
+			conect = conexionDB.getConexion();
+			String statememtSQL="";
+			
+			statememtSQL = "UPDATE cliente SET nombres=?, primer_apellido=?, segundo_apellido=?, direccion=?, curp=?, fecha_nacimiento=? WHERE curp=?";	
+			PreparedStatement statememt;
+			try {
+				conect.setAutoCommit(false);
+				statememt = conect.prepareStatement(statememtSQL);
+				statememt.setString(1, cliente.getNombre());
+				statememt.setString(2, cliente.getPrimerApellido());
+				statememt.setString(3, cliente.getSegundoApellido());
+				statememt.setString(4, cliente.getDireccion());
+				statememt.setString(5, cliente.getCurp());
+				statememt.setDate(6, cliente.getFechaNacimiento());
+				statememt.setString(7, cliente.getCurp());
+				statememt.executeUpdate();
+				conect.commit();
+				exito=true;
+			} catch (SQLException e) {
+				conect.rollback();
+				e.printStackTrace();
+			}finally {
+				conexionDB.closeConexion();
+			}			
+		}
 		return exito;
 	}
+	
+	
 	
 	public Cliente getCliente(String id) {
 		Cliente cliente=new Cliente();

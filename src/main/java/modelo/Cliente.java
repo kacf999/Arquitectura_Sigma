@@ -1,6 +1,6 @@
 package modelo;
 
-import java.sql.Date;
+import java.text.ParseException;
 
 public class Cliente extends Persona implements OperacionesREST {
 	private String direccion;
@@ -10,8 +10,8 @@ public class Cliente extends Persona implements OperacionesREST {
 		super();
 	}
 	
-	public Cliente(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento,
-			String direccion, String curp) {
+	public Cliente(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento,
+			String direccion, String curp) throws ParseException {
 		super(nombre, primerApellido, segundoApellido, fechaNacimiento);
 		this.direccion = direccion;
 		this.curp = curp;
