@@ -119,7 +119,7 @@ public class ClienteDAO {
 			conect = conexionDB.getConexion();
 			String statememtSQL="";
 			
-			statememtSQL = "UPDATE cliente SET nombres=?, primer_apellido=?, segundo_apellido=?, direccion=?, curp=?, fecha_nacimiento=? WHERE curp=?";	
+			statememtSQL = "UPDATE cliente SET nombres=?, primer_apellido=?, segundo_apellido=?, direccion=?, fecha_nacimiento=? WHERE curp=?";	
 			PreparedStatement statememt;
 			try {
 				conect.setAutoCommit(false);
@@ -128,9 +128,8 @@ public class ClienteDAO {
 				statememt.setString(2, cliente.getPrimerApellido());
 				statememt.setString(3, cliente.getSegundoApellido());
 				statememt.setString(4, cliente.getDireccion());
-				statememt.setString(5, cliente.getCurp());
-				statememt.setDate(6, cliente.getFechaNacimientoDate());
-				statememt.setString(7, cliente.getCurp());
+				statememt.setDate(5, cliente.getFechaNacimientoDate());
+				statememt.setString(6, cliente.getCurp());
 				statememt.executeUpdate();
 				conect.commit();
 				exito=true;

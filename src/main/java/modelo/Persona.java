@@ -3,13 +3,12 @@ package modelo;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class Persona implements OperacionesREST{
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
-	private Date fechaNacimiento;
+	private java.sql.Date fechaNacimiento;
 	
 	public Persona() {
 		
@@ -47,18 +46,20 @@ public class Persona implements OperacionesREST{
 		this.segundoApellido = segundoApellido;
 	}
 	
-	public String getFechaNacimientoString() {
-		return fechaNacimiento.toString();
-	}
-	
 	public Date getFechaNacimientoDate() {
 		return fechaNacimiento;
 	}
 	
-	public void setFechaNacimientoString(String fechaNacimiento) throws ParseException {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd");
+	public void setFechaNacimientoString(String fechaNacimiento) {
+		SimpleDateFormat formato=new SimpleDateFormat("yyyy/MM/dd");
 		
-		this.fechaNacimiento = new Date(sdf.parse(fechaNacimiento).getTime());
+		try {
+			java.util.Date fechaFormateada= formato.parse(fechaNacimiento);
+			this.fechaNacimiento = new java.sql.Date(fechaFormateada.getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void setFechaNacimientoDate(Date fechaNacimiento) {
