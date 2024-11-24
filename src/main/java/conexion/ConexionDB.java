@@ -2,14 +2,14 @@ package conexion;
 
 import java.sql.*;
 
-public class ConexionBD {
+public class ConexionDB {
 	private Connection conexion;
 	private String url;
 	private String usuario;
 	private String pass;
 	private String db;
 	
-	public ConexionBD() {
+	public ConexionDB() {
 		db="polizas";
 		url="jdbc:postgresql://127.0.0.1:5432/"+db;
 		usuario="postgres";

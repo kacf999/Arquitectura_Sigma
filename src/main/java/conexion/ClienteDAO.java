@@ -1,9 +1,6 @@
 package conexion;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.util.Optional;
-
 import modelo.Cliente;
 import modelo.ExceptionPoliza;
 
@@ -14,24 +11,31 @@ import modelo.ExceptionPoliza;
 *en la tabla "cliente" de la base de datos "polizas".<br><br>
 *@Project Polizas de Seguro
 *@Date 21/11/2024
-*@Author Jos� Carlos Ascencio Navarro
+*@Author José Carlos Ascencio Navarro
 *@DesarrolladoEn UACM San Lorenzo Tezonco
-*@version 1.0.0
+*@version 1.1.1
 **/
 
 
 public class ClienteDAO {
-	private ConexionBD conexionDB;
+	private ConexionDB conexionDB;
 	private Connection conect;
 	
-	public ClienteDAO() {
-		conexionDB=new ConexionBD();
-	}
+	
 	
 	/**
-	 * @param cliente
-	 * @return
-	 * @throws ExceptionPoliza
+	 * <p><b>ClienteDAO() : Constructor que crea un objeto ConexionDB para conectarse a una base de Datos</b></p>
+	 */
+	public ClienteDAO() {
+		conexionDB=new ConexionDB();
+	}
+	
+	
+	/**
+	 * <p><b>addCliente() : Metodo que crea un registro nuevo en la Base de Datos a partir de un Cliente</b></p>
+	 * @param cliente : Recibe un objeto Cliente el cual sera guardado en la Base de Datos
+	 * @return : Retorna False si fallo el registro del cliente en la Base de Datos y True si tuvo exito
+	 * @throws ExceptionPoliza : Lanza una excepcion en caso de que no se logre conectar con la Base de Datos
 	 */
 	public boolean addCliente(Cliente cliente) throws ExceptionPoliza {
 		boolean exito=false;
@@ -63,6 +67,13 @@ public class ClienteDAO {
 		return exito;
 	}
 	
+	
+	/**
+	 * <p><b>deleteCliente() : Metodo que elimina un registro existente de la Base de Datos a partir de un Cliente</b></p>
+	 * @param cliente : Recibe un objeto Cliente el cual sera eliminado de la Base de Datos
+	 * @return : Retorna False si fallo la eliminacion del registro en la Base de Datos y True si tuvo exito
+	 * @throws ExceptionPoliza : Lanza una excepcion en caso de que no se logre conectar con la Base de Datos
+	 */
 	public boolean deleteCliente(Cliente cliente) throws ExceptionPoliza {
 		boolean exito =false;
 		
@@ -88,6 +99,16 @@ public class ClienteDAO {
 		return exito;
 	}
 	
+	
+	/**
+	 * <p><b>updateCliente() : Metodo que actualiza un registro existente de la Base de Datos a partir de un Cliente.
+	 * en caso de no tener exito en la actualizacion el metodo hace rollback.</b></p>
+	 * @param cliente : Recibe un objeto Cliente el cual sera actualizado en la Base de Datos
+	 * @return boolean : Retorna False si fallo la actualizacion del registro en la Base de Datos y True si tuvo exito
+	 * @throws ExceptionPoliza : Lanza una excepcion en caso de que no se logre conectar con la Base de Datos
+	 *  o se haya pasado un objeto vacio.
+	 * @throws SQLException : Lanza una excepcion SQL en caso de error.
+	 */
 	public boolean updateCliente(Cliente cliente) throws ExceptionPoliza, SQLException {
 		boolean exito=false;
 		
@@ -124,7 +145,12 @@ public class ClienteDAO {
 	}
 	
 	
-	
+	/**
+	 * <p><b>getCliente() : Metodo que busca un registro existente de la Base de Datos a partir de un id, en este caso
+	 * el curp del cliente.</b></p>
+	 * @param id : Recibe una cadena de texto (curp) para buscar ese registro en la Base de Datos.
+	 * @return cliente : Retorna un objeto Cliente que fue creado si se encontro en la Base de Datos.
+	 */
 	public Cliente getCliente(String id) {
 		Cliente cliente=null;
 		
@@ -155,6 +181,13 @@ public class ClienteDAO {
 		return cliente;
 	}
 	
+	
+	
+	/**
+	 * <p><b>esObjetoVacio() : Metodo que verifica si un objeto es vacio.</b></p>
+	 * @param obj : Recibe Objeto.
+	 * @return boolean : Retorna true si el objeto es Vacio y False si el objeto no esta vacio.
+	 */
 	private boolean esObjetoVacio(Object obj) {
 		boolean esVacio=false;
 		if(obj.equals(null)) {
