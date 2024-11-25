@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @Repository
-public interface PolizaRepository extends JpaRepository<Poliza, UUID> {
+public interface PolizaRepositorio extends JpaRepository<Poliza, UUID> {
     // Los métodos básicos (findById, save, deleteById) ya están implementados
 	
 	@PutMapping("/cliente/{nombres}/{primer_apellido}/{segundo_apellido}/{direccion}/{curp}/{fecha_nacimiento}")

@@ -17,12 +17,12 @@ import modelo.Poliza;
 
 @RestController
 @RequestMapping("/api/polizas")
-public class PolizaController {
+public class PolizaControlador {
 
-	    private final PolizaService polizaService;
+	    private final PolizaServicio polizaService;
 
 	    // Constructor para inyectar el servicio
-	    public PolizaController(PolizaService polizaService) {
+	    public PolizaControlador(PolizaServicio polizaService) {
 	        this.polizaService = polizaService;
 	    }
 

@@ -1,4 +1,4 @@
-package com.example.poliza;
+package mx.edu.uacm.is.stl.as.ws;
 
 
 import org.springframework.boot.SpringApplication;

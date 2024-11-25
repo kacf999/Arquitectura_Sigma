@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import modelo.Poliza;
 
 @Service
-public class PolizaService {
+public class PolizaServicio {
 
-    private final PolizaRepository polizaRepository;
+    private final PolizaRepositorio polizaRepository;
 
     // Constructor para inyectar el repositorio
-    public PolizaService(PolizaRepository polizaRepository) {
+    public PolizaServicio(PolizaRepositorio polizaRepository) {
         this.polizaRepository = polizaRepository;
     }
 
