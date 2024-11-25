@@ -5,10 +5,11 @@ import java.util.Calendar;
 public class Beneficiario extends Persona implements OperacionesREST {
 
 	private int porcentaje;
+	private String clave_poliza;
 	
-	public Beneficiario(String nombre, String primerApellido, String segundoApellido, Calendar fechaNacimiento, int porcentaje) {
+	public Beneficiario(String nombre, String primerApellido, String segundoApellido, Calendar fechaNacimiento, int porcentaje, String clave_poliza) {
 		super(nombre, primerApellido, segundoApellido, fechaNacimiento);
-		
+		this.clave_poliza = clave_poliza;
 		this.porcentaje = porcentaje;
 	}
 	
@@ -18,4 +19,14 @@ public class Beneficiario extends Persona implements OperacionesREST {
 	public void setPorcentaje(int porcentaje) {
 		this.porcentaje = porcentaje;
 	}
+
+	public String getClave_poliza() {
+		return clave_poliza;
+	}
+
+	public void setClave_poliza(String clave_poliza) {
+		this.clave_poliza = clave_poliza;
+	}
+	
+	
 }
