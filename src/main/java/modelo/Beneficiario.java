@@ -8,11 +8,8 @@ public class Beneficiario extends Persona implements OperacionesREST {
 	private int porcentaje;
 	private String clave_poliza;
 	
-<<<<<<< HEAD
-	public Beneficiario(String nombre, String primerApellido, String segundoApellido, Calendar fechaNacimiento, int porcentaje, String clave_poliza) {
-=======
-	public Beneficiario(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento, int porcentaje) throws ParseException {
->>>>>>> gestionDB
+
+	public Beneficiario(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento, String clave_poliza, int porcentaje) throws ParseException {
 		super(nombre, primerApellido, segundoApellido, fechaNacimiento);
 		this.clave_poliza = clave_poliza;
 		this.porcentaje = porcentaje;

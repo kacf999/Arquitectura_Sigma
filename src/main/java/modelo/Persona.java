@@ -50,6 +50,9 @@ public class Persona implements OperacionesREST{
 		return fechaNacimiento;
 	}
 	
+	public String getFechaNacimientoString() {
+		return fechaNacimiento.toString();
+	}
 	public void setFechaNacimientoString(String fechaNacimiento) {
 		SimpleDateFormat formato=new SimpleDateFormat("yyyy/MM/dd");
 		
