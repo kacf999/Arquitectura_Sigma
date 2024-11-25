@@ -1,5 +1,6 @@
 package com.example.poliza;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,8 @@ public class PolizaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PolizaApplication.class, args);
+		
+		
 	}
 
 }

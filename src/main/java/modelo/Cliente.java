@@ -1,12 +1,17 @@
 package modelo;
 
-import java.util.Calendar;
+import java.text.ParseException;
 
 public class Cliente extends Persona implements OperacionesREST {
 	private String direccion;
 	private String curp;
-	public Cliente(String nombre, String primerApellido, String segundoApellido, Calendar fechaNacimiento,
-			String direccion, String curp) {
+	
+	public Cliente() {
+		super();
+	}
+	
+	public Cliente(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento,
+			String direccion, String curp) throws ParseException {
 		super(nombre, primerApellido, segundoApellido, fechaNacimiento);
 		this.direccion = direccion;
 		this.curp = curp;
