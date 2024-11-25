@@ -1,4 +1,4 @@
-package modelo;
+package mx.edu.uacm.is.stl.as.ws.modelo;
 
 /**
 *<h2>Clase ExceptionPoliza</h2>

@@ -1,8 +1,9 @@
-package conexion;
+package mx.edu.uacm.is.stl.as.ws.conexion;
 
 import java.sql.*;
-import modelo.Cliente;
-import modelo.ExceptionPoliza;
+
+import mx.edu.uacm.is.stl.as.ws.modelo.Cliente;
+import mx.edu.uacm.is.stl.as.ws.modelo.ExceptionPoliza;
 
 
 /**

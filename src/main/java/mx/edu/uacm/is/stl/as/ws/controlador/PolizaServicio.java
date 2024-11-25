@@ -1,10 +1,10 @@
-package controlador;
+package mx.edu.uacm.is.stl.as.ws.controlador;
 
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import modelo.Poliza;
+import mx.edu.uacm.is.stl.as.ws.modelo.Poliza;
 
 @Service
 public class PolizaServicio {

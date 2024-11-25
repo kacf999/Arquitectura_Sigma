@@ -1,4 +1,4 @@
-package conexion;
+package mx.edu.uacm.is.stl.as.ws.conexion;
 
 import java.sql.*;
 

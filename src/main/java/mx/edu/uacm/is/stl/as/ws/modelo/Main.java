@@ -1,9 +1,9 @@
-package modelo;
+package mx.edu.uacm.is.stl.as.ws.modelo;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import conexion.ClienteDAO;
+import mx.edu.uacm.is.stl.as.ws.conexion.ClienteDAO;
 
 public class Main {
 

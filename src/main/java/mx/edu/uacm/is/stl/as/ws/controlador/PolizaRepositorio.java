@@ -1,4 +1,4 @@
-package controlador;
+package mx.edu.uacm.is.stl.as.ws.controlador;
 
 import java.sql.Date;
 
