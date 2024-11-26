@@ -40,7 +40,7 @@ public class ClienteDAO {
 	public boolean addCliente(Cliente cliente) throws ExceptionPoliza {
 		boolean exito=false;
 		
-		if(esObjetoVacio(cliente)) {
+		if(isEmpty(cliente)) {
 			conexionDB.closeConexion();
 			throw new ExceptionPoliza(204);
 		}else {
@@ -77,7 +77,7 @@ public class ClienteDAO {
 	public boolean deleteCliente(Cliente cliente) throws ExceptionPoliza {
 		boolean exito =false;
 		
-		if(esObjetoVacio(cliente)) {
+		if(isEmpty(cliente)) {
 			conexionDB.closeConexion();
 			throw new ExceptionPoliza(204);
 		}else {		
@@ -112,7 +112,7 @@ public class ClienteDAO {
 	public boolean updateCliente(Cliente cliente) throws ExceptionPoliza, SQLException {
 		boolean exito=false;
 		
-		if(esObjetoVacio(cliente)) {
+		if(isEmpty(cliente)) {
 			conexionDB.closeConexion();
 			throw new ExceptionPoliza(204);
 		}else {
@@ -183,16 +183,16 @@ public class ClienteDAO {
 	
 	
 	/**
-	 * <p><b>esObjetoVacio() : Metodo que verifica si un objeto es vacio.</b></p>
+	 * <p><b>isEmpty() : Metodo que verifica si un objeto es vacio.</b></p>
 	 * @param obj : Recibe Objeto.
 	 * @return boolean : Retorna true si el objeto es Vacio y False si el objeto no esta vacio.
 	 */
-	private boolean esObjetoVacio(Object obj) {
-		boolean esVacio=false;
+	private boolean isEmpty(Object obj) {
+		boolean empty=false;
 		if(obj.equals(null)) {
-			esVacio=true;
+			empty=true;
 		}
-		return esVacio;
+		return empty;
 	}
 	
 }
