@@ -6,8 +6,12 @@ public class Poliza {
 	private float monto;
 	private String descripcion;
 
-	public Poliza(String clave, int tipo, float monto, String descripcion) {
+	public Poliza() {
 		super();
+	}
+	
+	public Poliza(String clave, int tipo, float monto, String descripcion) {
+		this();
 		this.clave = clave;
 		this.tipo = tipo;
 		this.monto = monto;
