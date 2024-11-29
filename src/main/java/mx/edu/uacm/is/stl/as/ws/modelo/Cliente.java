@@ -1,4 +1,4 @@
-package modelo;
+package mx.edu.uacm.is.stl.as.ws.modelo;
 
 import java.text.ParseException;
 

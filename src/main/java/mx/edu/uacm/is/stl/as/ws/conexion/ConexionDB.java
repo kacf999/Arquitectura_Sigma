@@ -1,4 +1,4 @@
-package conexion;
+package mx.edu.uacm.is.stl.as.ws.conexion;
 
 import java.sql.*;
 
@@ -10,10 +10,10 @@ public class ConexionDB {
 	private String db;
 	
 	public ConexionDB() {
-		db="polizas";
+		db="seguros_parq_origen";
 		url="jdbc:postgresql://127.0.0.1:5432/"+db;
 		usuario="postgres";
-		pass="postgres1004";		
+		pass="uacm123";		
 	}
 
 	public Connection getConexion() {

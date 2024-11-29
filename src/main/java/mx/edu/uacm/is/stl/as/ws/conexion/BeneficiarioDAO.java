@@ -1,15 +1,16 @@
-package conexion;
+package mx.edu.uacm.is.stl.as.ws.conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+
+import mx.edu.uacm.is.stl.as.ws.modelo.Beneficiario;
+import mx.edu.uacm.is.stl.as.ws.modelo.ExceptionPoliza;
+
 import java.sql.Date;
 
-import modelo.Beneficiario;
-import modelo.Cliente;
-import modelo.ExceptionPoliza;
 
 /**
 *<h2>Clase BeneficiarioDAO</h2>

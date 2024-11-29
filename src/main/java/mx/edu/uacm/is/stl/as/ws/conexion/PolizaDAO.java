@@ -1,12 +1,13 @@
-package conexion;
+package mx.edu.uacm.is.stl.as.ws.conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import modelo.Poliza;
-import modelo.ExceptionPoliza;
+import mx.edu.uacm.is.stl.as.ws.modelo.ExceptionPoliza;
+import mx.edu.uacm.is.stl.as.ws.modelo.Poliza;
+
 
 /**
 *<h2>Clase PolizaDAO</h2>
@@ -53,7 +54,7 @@ public class PolizaDAO {
 			PreparedStatement statememt;
 			try {
 				statememt = conect.prepareStatement(statememtSQL);
-				statememt.setString(1, poliza.getClave());
+				statememt.setString(1, poliza.getClave().toString());
 				statememt.setInt(2, poliza.getTipo());
 				statememt.setDouble(3, poliza.getMonto());    
 				statememt.setString(4, poliza.getDescripcion());
@@ -90,7 +91,7 @@ public class PolizaDAO {
 			PreparedStatement statememt;
 			try {
 				statememt = conect.prepareStatement(statememtSQL);
-				statememt.setString(1, poliza.getClave());
+				statememt.setString(1, poliza.getClave().toString());
 				statememt.executeUpdate();
 				exito=true;
 			} catch (SQLException e) {
@@ -132,7 +133,7 @@ public class PolizaDAO {
 				statememt.setFloat(2, poliza.getMonto());
 				statememt.setString(3, poliza.getDescripcion());
 //				statememt.setDate(4, poliza.get());
-				statememt.setString(5, poliza.getClave());
+				statememt.setString(5, poliza.getClave().toString());
 				statememt.executeUpdate();
 				conect.commit();
 				exito=true;
@@ -168,7 +169,7 @@ public class PolizaDAO {
 			resultado=statememt.executeQuery();
 			while(resultado.next()) {
 				poliza=new Poliza();
-				poliza.setClave(resultado.getString("clave"));
+//				poliza.setClave(resultado.getString("clave"));
 				poliza.setTipo(resultado.getInt("tipo"));
 				poliza.setMonto(resultado.getFloat("monto"));
 				poliza.setDescripcion(resultado.getString("descripcion"));

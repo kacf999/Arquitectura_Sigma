@@ -1,11 +1,11 @@
-package modelo;
+package mx.edu.uacm.is.stl.as.ws.modelo;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import conexion.ClienteDAO;
+import mx.edu.uacm.is.stl.as.ws.conexion.ClienteDAO;
 
 public class Main {
 

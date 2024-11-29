@@ -1,7 +1,10 @@
-package modelo;
+package mx.edu.uacm.is.stl.as.ws.modelo;
 
+import java.util.UUID;
+
+@Entity
 public class Poliza {
-	private String clave;
+	private UUID clave;
 	private int tipo;
 	private float monto;
 	private String descripcion;
@@ -10,17 +13,17 @@ public class Poliza {
 		super();
 	}
 	
-	public Poliza(String clave, int tipo, float monto, String descripcion) {
+	public Poliza(UUID clave, int tipo, float monto, String descripcion) {
 		this();
 		this.clave = clave;
 		this.tipo = tipo;
 		this.monto = monto;
 		this.descripcion = descripcion;
 	}
-	public String getClave() {
+	public UUID getClave() {
 		return clave;
 	}
-	public void setClave(String clave) {
+	public void setClave(UUID clave) {
 		this.clave = clave;
 	}
 	public int getTipo() {
