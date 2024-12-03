@@ -1,22 +1,27 @@
 package mx.edu.uacm.is.stl.as.ws.conexion;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class ConexionDB {
+public class ConexionDB 
+{
 	private Connection conexion;
-	private String url;
 	private String usuario;
 	private String pass;
+	private String url;
 	private String db;
 	
-	public ConexionDB() {
+	public ConexionDB() 
+	{
 		db="seguros_parq_origen";
 		url="jdbc:postgresql://127.0.0.1:5432/"+db;
 		usuario="postgres";
 		pass="uacm123";		
 	}
 
-	public Connection getConexion() {
+	public Connection getConexion() 
+	{
 		try {
 			conexion = DriverManager.getConnection(url, usuario, pass);
 		} catch (SQLException e) {
