@@ -61,7 +61,7 @@ public class BeneficiarioDAO {
 				statememt.setString(2, beneficiario.getPrimerApellido());
 				statememt.setString(3, beneficiario.getSegundoApellido());
 				statememt.setDate(4, beneficiario.getFechaNacimientoDate());
-//				statememt.setU (5, beneficiario.get);
+				statememt.setString(5, beneficiario.getClave_poliza());
 				statememt.setInt(6, beneficiario.getPorcentaje());
 				statememt.executeUpdate();
 				exito=true;

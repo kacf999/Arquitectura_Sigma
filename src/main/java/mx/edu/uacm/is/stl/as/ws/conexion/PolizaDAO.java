@@ -58,7 +58,7 @@ public class PolizaDAO {
 				statememt.setInt(2, poliza.getTipo());
 				statememt.setDouble(3, poliza.getMonto());    
 				statememt.setString(4, poliza.getDescripcion());
-//				statememt.setString(5, poliza.get);
+				statememt.setString(5, poliza.get);
 				statememt.executeUpdate();
 				exito=true;
 			} catch (SQLException e) {
