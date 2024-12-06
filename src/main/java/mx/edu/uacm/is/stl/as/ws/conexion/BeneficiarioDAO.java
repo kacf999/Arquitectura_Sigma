@@ -17,10 +17,10 @@ import java.sql.Date;
 *Clase que gestiona la creación, eliminación, actualización y busqueda de los Beneficiarios, 
 *en la tabla "beneficiario_poliza" de la base de datos "polizas".<br><br>
 *@Project Polizas de Seguro
-*@Date 24/11/2024
+*@Date 06/12/2024
 *@Author José Carlos Ascencio Navarro
 *@DesarrolladoEn UACM San Lorenzo Tezonco
-*@version 1.0.0
+*@version 2.0.0
 **/
 
 
@@ -61,7 +61,7 @@ public class BeneficiarioDAO {
 				statememt.setString(2, beneficiario.getPrimerApellido());
 				statememt.setString(3, beneficiario.getSegundoApellido());
 				statememt.setDate(4, beneficiario.getFechaNacimientoDate());
-				statememt.setString(5, beneficiario.getClave_poliza());
+				statememt.setObject(5, beneficiario.getClave_poliza());
 				statememt.setInt(6, beneficiario.getPorcentaje());
 				statememt.executeUpdate();
 				exito=true;
@@ -90,7 +90,7 @@ public class BeneficiarioDAO {
 			throw new ExceptionPoliza(204);
 		}else {		
 			conect = conexionDB.getConexion();
-			String statememtSQL = "DELETE FROM beneficiario_poliza WHERE "+ statementID+" porcentaje=?";
+			String statememtSQL = "DELETE FROM beneficiario_poliza WHERE "+ statementID+", porcentaje=?";
 	
 			PreparedStatement statememt;
 			try {
@@ -99,7 +99,7 @@ public class BeneficiarioDAO {
 				statememt.setString(2, beneficiario.getPrimerApellido());
 				statememt.setString(3, beneficiario.getSegundoApellido());
 				statememt.setDate(4, beneficiario.getFechaNacimientoDate());
-//				statememt.setString(5, beneficiario.ge());
+				statememt.setObject(5, beneficiario.getClave_poliza());
 				statememt.setInt(6, beneficiario.getPorcentaje());
 				statememt.executeUpdate();
 				exito=true;
@@ -141,13 +141,13 @@ public class BeneficiarioDAO {
 				statememt.setString(2, beneficiario.getPrimerApellido());
 				statememt.setString(3, beneficiario.getSegundoApellido());
 				statememt.setDate(4, beneficiario.getFechaNacimientoDate());
-//				statememt.setString(5, beneficiario.get());
+				statememt.setObject(5, beneficiario.getClave_poliza());
 				statememt.setInt(6, beneficiario.getPorcentaje());
 				statememt.setString(7, beneficiario.getNombre());
 				statememt.setString(8, beneficiario.getPrimerApellido());
 				statememt.setString(9, beneficiario.getSegundoApellido());
 				statememt.setDate(10, beneficiario.getFechaNacimientoDate());
-//				statememt.setString(11, beneficiario.get());
+				statememt.setObject(11, beneficiario.getClave_poliza());
 				statememt.executeUpdate();
 				conect.commit();
 				exito=true;
@@ -171,42 +171,40 @@ public class BeneficiarioDAO {
 	 * @param clavePoliza : Recibe una cadena de texto de Tipo UUID (Clave de Poliza) que forma parte de la clave compuesta en la Base de Datos
 	 * @return beneficiario : Retorna un objeto Beneficiario que fue creado si se encontro en la Base de Datos.
 	 */
-//	public Beneficiario getBeneficiario(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento, UUID clavePoliza) {
-//		Beneficiario beneficiario=null;
-//		
-//		conect = conexionDB.getConexion();
-//		String statememtSQL="";
-//		ResultSet resultado;
-//		
-//		statememtSQL = "SELECT * FROM beneficiario_poliza WHERE "+statementID;	
-//		PreparedStatement statememt;
-//		try {
-//			statememt = conect.prepareStatement(statememtSQL);
-//			statememt.setString(1, nombre);
-//			statememt.setString(2, primerApellido);
-//			statememt.setString(3, segundoApellido);
-//			statememt.setDate(4, fechaNacimiento);
-//			statememt.setString(5, clavePoliza.toString());
-//			
-//			
-//			resultado=statememt.executeQuery();
-//			while(resultado.next()) {
-//				beneficiario=new Beneficiario();
-//				beneficiario.setNombre(resultado.getString("nombres"));
-//				beneficiario.setPrimerApellido(resultado.getString("primer_apellido"));
-//				beneficiario.setSegundoApellido(resultado.getString("segundo_apellido"));
-//				beneficiario.setFechaNacimientoDate(resultado.getDate("fecha_nacimiento"));
-////				beneficiario.set(resultado.getString("curp"));
-//				beneficiario.setPorcentaje(resultado.getInt("porcentaje"));	
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			conexionDB.closeConexion();
-//		}			
-//		return beneficiario;
-//	}
-//	
+	public Beneficiario getBeneficiario(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento, UUID clavePoliza) {
+		Beneficiario beneficiario=null;
+		
+		conect = conexionDB.getConexion();
+		String statememtSQL="";
+		ResultSet resultado;
+		
+		statememtSQL = "SELECT * FROM beneficiario_poliza WHERE "+statementID;	
+		PreparedStatement statememt;
+		try {
+			statememt = conect.prepareStatement(statememtSQL);
+			statememt.setString(1, nombre);
+			statememt.setString(2, primerApellido);
+			statememt.setString(3, segundoApellido);
+			statememt.setDate(4, fechaNacimiento);
+			statememt.setObject(5, clavePoliza);
+			resultado=statememt.executeQuery();
+			while(resultado.next()) {
+				beneficiario=new Beneficiario();
+				beneficiario.setNombre(resultado.getString("nombres"));
+				beneficiario.setPrimerApellido(resultado.getString("primer_apellido"));
+				beneficiario.setSegundoApellido(resultado.getString("segundo_apellido"));
+				beneficiario.setFechaNacimientoDate(resultado.getDate("fecha_nacimiento"));
+				beneficiario.setClave_poliza(resultado.getObject("clave_poliza", UUID.class));
+				beneficiario.setPorcentaje(resultado.getInt("porcentaje"));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conexionDB.closeConexion();
+		}			
+		return beneficiario;
+	}
+	
 	
 	
 	/**
