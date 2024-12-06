@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import mx.edu.uacm.is.stl.as.ws.modelo.ExceptionPoliza;
 import mx.edu.uacm.is.stl.as.ws.modelo.Poliza;
@@ -14,10 +15,10 @@ import mx.edu.uacm.is.stl.as.ws.modelo.Poliza;
 *Clase que gestiona la creación, eliminación, actualización y busqueda de las Polizas, 
 *en la tabla "poliza" de la base de datos "polizas".<br><br>
 *@Project Polizas de Seguro
-*@Date 26/11/2024
+*@Date 06/12/2024
 *@Author José Carlos Ascencio Navarro
 *@DesarrolladoEn UACM San Lorenzo Tezonco
-*@version 1.0.0
+*@version 2.0.0
 **/
 
 
@@ -54,7 +55,7 @@ public class PolizaDAO {
 			PreparedStatement statememt;
 			try {
 				statememt = conect.prepareStatement(statememtSQL);
-				statememt.setString(1, poliza.getClave().toString());
+				statememt.setObject(1, poliza.getClave());
 				statememt.setInt(2, poliza.getTipo());
 				statememt.setDouble(3, poliza.getMonto());    
 				statememt.setString(4, poliza.getDescripcion());
@@ -86,12 +87,15 @@ public class PolizaDAO {
 			throw new ExceptionPoliza(204);
 		}else {		
 			conect = conexionDB.getConexion();
-			String statememtSQL = "DELETE FROM poliza WHERE clave =?, tipo=?, descripcion=?, curp_cliente=?";
+			String statememtSQL = "DELETE FROM poliza WHERE clave=? AND tipo=? AND descripcion=? AND curp_cliente=?";
 	
 			PreparedStatement statememt;
 			try {
 				statememt = conect.prepareStatement(statememtSQL);
-				statememt.setString(1, poliza.getClave().toString());
+				statememt.setObject(1, poliza.getClave());
+				statememt.setInt(2, poliza.getTipo());
+				statememt.setString(3, poliza.getDescripcion());
+				statememt.setString(4, poliza.getCurpCliente());
 				statememt.executeUpdate();
 				exito=true;
 			} catch (SQLException e) {
@@ -132,8 +136,8 @@ public class PolizaDAO {
 				statememt.setInt(1, poliza.getTipo());
 				statememt.setFloat(2, poliza.getMonto());
 				statememt.setString(3, poliza.getDescripcion());
-//				statememt.setDate(4, poliza.get());
-				statememt.setString(5, poliza.getClave().toString());
+				statememt.setString(4, poliza.getCurpCliente());
+				statememt.setObject(5, poliza.getClave());
 				statememt.executeUpdate();
 				conect.commit();
 				exito=true;
@@ -153,8 +157,9 @@ public class PolizaDAO {
 	 * Base de Datos "polizas" a partir de un id, en este caso la clave de la Poliza.</b></p>
 	 * @param id : Recibe una cadena de texto (clave de la poliza) para buscar ese registro en la Base de Datos.
 	 * @return Poliza : Retorna un objeto Poliza que se crea si se encontro el registro en la Base de Datos.
+	 * @throws ExceptionPoliza : Lanza una excepcion si el curp del cliente no es valido.
 	 */
-	public Poliza getPoliza(String id) {
+	public Poliza getPoliza(String id) throws ExceptionPoliza {
 		Poliza poliza=null;
 		
 		conect = conexionDB.getConexion();
@@ -169,11 +174,48 @@ public class PolizaDAO {
 			resultado=statememt.executeQuery();
 			while(resultado.next()) {
 				poliza=new Poliza();
-//				poliza.setClave(resultado.getString("clave"));
+				poliza.setClave(resultado.getObject("clave", UUID.class));
 				poliza.setTipo(resultado.getInt("tipo"));
 				poliza.setMonto(resultado.getFloat("monto"));
 				poliza.setDescripcion(resultado.getString("descripcion"));
-//				poliza.setCurp(resultado.getString("curp"));	
+				poliza.setCurpCliente(resultado.getString("curp_cliente"));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conexionDB.closeConexion();
+		}			
+		return poliza;
+	}
+	
+	
+	/**
+	 * <p><b>getPoliza() : Metodo que busca un registro existente de la tabla "poliza" de la 
+	 * Base de Datos "polizas" a partir de un id, en este caso la clave de la Poliza.</b></p>
+	 * @param id : Recibe un objecto UUID (clave de la poliza) para buscar ese registro en la Base de Datos.
+	 * @return Poliza : Retorna un objeto Poliza que se crea si se encontro el registro en la Base de Datos.
+	 * @throws ExceptionPoliza : Lanza una excepcion si el curp del cliente no es valido.
+	 */
+	public Poliza getPoliza(UUID id) throws ExceptionPoliza {
+		Poliza poliza=null;
+		
+		conect = conexionDB.getConexion();
+		String statememtSQL="";
+		ResultSet resultado;
+		
+		statememtSQL = "SELECT * FROM poliza WHERE clave=?";	
+		PreparedStatement statememt;
+		try {
+			statememt = conect.prepareStatement(statememtSQL);
+			statememt.setObject(1, id);
+			resultado=statememt.executeQuery();
+			while(resultado.next()) {
+				poliza=new Poliza();
+				poliza.setClave(resultado.getObject("clave", UUID.class));
+				poliza.setTipo(resultado.getInt("tipo"));
+				poliza.setMonto(resultado.getFloat("monto"));
+				poliza.setDescripcion(resultado.getString("descripcion"));
+				poliza.setCurpCliente(resultado.getString("curp_cliente"));	
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
