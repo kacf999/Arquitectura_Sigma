@@ -10,10 +10,10 @@ public class ConexionDB {
 	private String db;
 	
 	public ConexionDB() {
-		db="seguros_parq_origen";
+		db="polizas";
 		url="jdbc:postgresql://127.0.0.1:5432/"+db;
 		usuario="postgres";
-		pass="uacm123";		
+		pass="postgres1004";		
 	}
 
 	public Connection getConexion() {

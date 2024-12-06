@@ -1,13 +1,18 @@
 package mx.edu.uacm.is.stl.as.ws.modelo;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Optional;
 
-public class Cliente extends Persona implements OperacionesREST {
+public class Cliente extends Persona {
 	private String direccion;
 	private String curp;
+	private ArrayList<Poliza> polizas;
+	
 	
 	public Cliente() {
 		super();
+		polizas=new ArrayList<Poliza>();
 	}
 	
 	public Cliente(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento,
@@ -28,27 +33,17 @@ public class Cliente extends Persona implements OperacionesREST {
 	public void setCurp(String curp) {
 		this.curp = curp;
 	}
-	@Override
-	public void get() {
-		// TODO Auto-generated method stub
-		super.get();
-	}
-	@Override
-	public void put() {
-		// TODO Auto-generated method stub
-		super.put();
-	}
-	@Override
-	public void post() {
-		// TODO Auto-generated method stub
-		super.post();
-	}
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		super.delete();
-	}
 	
-	
+	public boolean addPoliza(Poliza poliza) {
+		boolean exito=false;
+		Optional<Poliza> vacio=Optional.of(poliza);
+		
+		if(vacio.isPresent()) {
+			polizas.add(poliza);
+			exito=true;
+		}
+		
+		return exito;
+	}
 	
 }

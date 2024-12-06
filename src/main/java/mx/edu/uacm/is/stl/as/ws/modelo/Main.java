@@ -4,13 +4,27 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 import mx.edu.uacm.is.stl.as.ws.conexion.ClienteDAO;
+import mx.edu.uacm.is.stl.as.ws.conexion.PolizaDAO;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException, ExceptionPoliza, ParseException {
-		ClienteDAO clienteDAO=new ClienteDAO();
+		PolizaDAO pDAO=new PolizaDAO();
+		Poliza p1=new Poliza();
+		UUID clave=UUID.randomUUID();
+		p1.setClave(clave);
+//		p1.setCurpCliente("AENC83112HDFSVR05");
+		p1.setCurpCliente("AENC831112HDFSVR01");
+		p1.setDescripcion("Seguro Laboral");
+		p1.setTipo(2);
+		p1.setMonto(50000);
+		
+		pDAO.addPoliza(p1);
+		
+//		ClienteDAO clienteDAO=new ClienteDAO();
 //		Cliente c1=new Cliente("Armando", "Hoyos", "Eloigameno", "2005/12/28","Siempre Viva", "AENCE654848E");
 //		Cliente c2=new Cliente("Pedro", "Picapiedra", "Troncoso", "0500/05/31","Caverna 55", "PEPT");
 //		Cliente c4=new Cliente("Vilma", "Picapiedra", "Troncoso", "0500/10/28","Caverna 55", "AENCE6548E");
@@ -46,15 +60,15 @@ public class Main {
 
 		
 		
-		Cliente cB=clienteDAO.getCliente("AENCE6548E");
-		
-		System.out.println(cB.getCurp());
-		System.out.println(cB.getDireccion());
-		System.out.println(cB.getNombre());
-		System.out.println(cB.getPrimerApellido());
-		System.out.println(cB.getSegundoApellido());
-		System.out.println(cB.getFechaNacimientoDate());
-
+//		Cliente cB=clienteDAO.getCliente("AENCE6548E");
+//		
+//		System.out.println(cB.getCurp());
+//		System.out.println(cB.getDireccion());
+//		System.out.println(cB.getNombre());
+//		System.out.println(cB.getPrimerApellido());
+//		System.out.println(cB.getSegundoApellido());
+//		System.out.println(cB.getFechaNacimientoDate());
+//
 		
 		
 

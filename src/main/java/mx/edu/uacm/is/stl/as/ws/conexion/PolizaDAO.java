@@ -58,7 +58,7 @@ public class PolizaDAO {
 				statememt.setInt(2, poliza.getTipo());
 				statememt.setDouble(3, poliza.getMonto());    
 				statememt.setString(4, poliza.getDescripcion());
-				statememt.setString(5, poliza.get);
+				statememt.setString(5, poliza.getCurpCliente());
 				statememt.executeUpdate();
 				exito=true;
 			} catch (SQLException e) {
@@ -86,7 +86,7 @@ public class PolizaDAO {
 			throw new ExceptionPoliza(204);
 		}else {		
 			conect = conexionDB.getConexion();
-			String statememtSQL = "DELETE FROM poliza WHERE clave =?";
+			String statememtSQL = "DELETE FROM poliza WHERE clave =?, tipo=?, descripcion=?, curp_cliente=?";
 	
 			PreparedStatement statememt;
 			try {

@@ -52,12 +52,12 @@ public class Poliza {
 	
 	public boolean setCurpCliente(String curp) throws ExceptionPoliza {
 		boolean exito=false;
-		String regexCURP = "[\\A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{2}[BCDFGHJKLMNPQRSTVWXYZ]{3}([A-Z]{2})?([0-9]{2})?";
-		Pattern pattern = Pattern.compile(regexCURP);
+//		String regexCURP = "[\\A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{2}[BCDFGHJKLMNPQRSTVWXYZ]{3}([A-Z]{2})?([0-9]{2})?/g";
+		Pattern pattern = Pattern.compile("[A-Z]{4}[0-9]{6}[HM]{1}[A-Z]{2}[BCDFGHJKLMNPQRSTVWXYZ]{3}([A-Z]{2})?([0-9]{2})");
 		
 		Matcher matcher = pattern.matcher(curp);
 		
-		if(matcher.matches()) {
+		if(matcher.find()) {
 			exito=true;
 			curp_cliente=curp;
 		}else {
