@@ -8,6 +8,9 @@ public class Beneficiario extends Persona implements OperacionesREST {
 	private int porcentaje;
 	private UUID clave_poliza;
 	
+	public Beneficiario(){
+		
+	}
 
 	public Beneficiario(String nombre, String primerApellido, String segundoApellido, String fechaNacimiento, UUID clave_poliza, int porcentaje) throws ParseException {
 		super(nombre, primerApellido, segundoApellido, fechaNacimiento);
