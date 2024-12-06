@@ -14,18 +14,23 @@ public class Main {
 	public static void main(String[] args) throws SQLException, ExceptionPoliza, ParseException {
 		PolizaDAO pDAO=new PolizaDAO();
 		Poliza p1=new Poliza();
-		UUID clave=UUID.randomUUID();
+//		UUID clave=UUID.randomUUID();
+		UUID clave=UUID.fromString("f5c8271b-b325-4423-ba90-6caac9db44a9");
 		p1.setClave(clave);
 //		p1.setCurpCliente("AENC83112HDFSVR05");
-		p1.setCurpCliente("AENC831112HDFSVR01");
-		p1.setDescripcion("Seguro Laboral");
-		p1.setTipo(2);
-		p1.setMonto(50000);
+		ClienteDAO clienteDAO=new ClienteDAO();
+		Cliente c1=new Cliente("Armando", "Hoyos", "Eloigameno", "2005/12/28","Siempre Viva", "AAHE900525HDFSVR05");
+//		clienteDAO.addCliente(c1);
 		
-		pDAO.addPoliza(p1);
+		p1.setCurpCliente(c1.getCurp());
+		p1.setDescripcion("Seguro Escolar");
+		p1.setTipo(1);
+		p1.setMonto(25000);
 		
-//		ClienteDAO clienteDAO=new ClienteDAO();
-//		Cliente c1=new Cliente("Armando", "Hoyos", "Eloigameno", "2005/12/28","Siempre Viva", "AENCE654848E");
+//		pDAO.addPoliza(p1);
+//		pDAO.deletePoliza(p1);
+		pDAO.updatePoliza(p1);
+		
 //		Cliente c2=new Cliente("Pedro", "Picapiedra", "Troncoso", "0500/05/31","Caverna 55", "PEPT");
 //		Cliente c4=new Cliente("Vilma", "Picapiedra", "Troncoso", "0500/10/28","Caverna 55", "AENCE6548E");
 //		Cliente c3=new Cliente("Lola", "Trailera", "Saavedra", "2000/01/15","Siempre Viva", "LOLTE654848E");
@@ -72,7 +77,7 @@ public class Main {
 		
 		
 
-//		clienteDAO.addCliente(c1);
+
 //		clienteDAO.addCliente(c2);
 //		clienteDAO.addCliente(c3);
 		
